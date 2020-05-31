@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="departments") @Getter @Setter
-@ToString(exclude = {"address", "employees", "cars"}, callSuper = true)
+@ToString(exclude = {"address"}, callSuper = true)
 public class Department extends ParentEntity{
 
     @Column(nullable = false, unique = true)
@@ -21,10 +21,4 @@ public class Department extends ParentEntity{
 
     @OneToOne @JoinColumn(name="address_id")
     private Address address;
-
-    @OneToMany(mappedBy = "department")
-    private Set<Employee> employees = new HashSet<>();
-
-    @OneToMany(mappedBy = "department")
-    private Set<Car> cars = new HashSet<>();
 }

@@ -17,7 +17,7 @@ public class ReservationRent extends ParentEntity {
     @OneToOne @JoinColumn(name="employee_id")
     private Employee employee; // set the currently logged in when the vehicle is released
 
-    @ManyToOne
+    @OneToOne @JoinColumn(name = "car_id")
     private Car car;
 
     private LocalDateTime realRentDate;
