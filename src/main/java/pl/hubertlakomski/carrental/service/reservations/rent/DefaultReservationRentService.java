@@ -55,14 +55,12 @@ public class DefaultReservationRentService implements ReservationRentService {
 
         reservationRent.setEmployee(employeeRepository
                 .getOne(reservationRentData.getEmployeeId()));
-        reservationRent.setReservation(reservationRepository
-                .getOne(reservationRentData.getReservationId()));
 
         reservationRentRepository.save(reservationRent);
 
         Reservation reservation =
                 reservationRepository.
-                        getOne(reservationRent.getReservation().getId());
+                        getOne(reservationRentData.getReservationId());
 
         reservation.setRentData(reservationRent); //save reservation_rent_id to main reservation
 
