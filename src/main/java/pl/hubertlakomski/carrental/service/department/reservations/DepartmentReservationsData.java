@@ -1,12 +1,10 @@
-package pl.hubertlakomski.carrental.service.reservations.department;
+package pl.hubertlakomski.carrental.service.department.reservations;
 
 import lombok.Data;
 import lombok.ToString;
 
 @Data @ToString
-public class ReservationDepartmentData {
-
-    private String rentDepartmentCode;
+public class DepartmentReservationsData {
 
     private String plannedRentDate;
     private String plannedReturnDate;

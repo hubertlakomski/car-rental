@@ -16,4 +16,10 @@ public class SippCode extends ParentEntity {
     @Column(nullable = false)
     private String code;
 
+    @Column(nullable = false)
+    private Long deposit;
+
+    @Column(nullable = false)
+    private Long perDayCharge;
+
 }

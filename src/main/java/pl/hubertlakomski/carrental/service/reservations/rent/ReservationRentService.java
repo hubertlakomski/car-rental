@@ -4,6 +4,6 @@ public interface ReservationRentService {
 
     ReservationRentData prepareData(Long reservationId);
 
-    void rentCar(ReservationRentData reservationRentData);
+    void processData(ReservationRentData reservationRentData);
 
 }

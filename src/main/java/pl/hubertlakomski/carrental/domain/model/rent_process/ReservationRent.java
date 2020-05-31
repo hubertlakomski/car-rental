@@ -10,19 +10,20 @@ import pl.hubertlakomski.carrental.domain.model.ParentEntity;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity @Table(name="reservation_rent") @Getter @Setter @ToString
+@Entity @Table(name="reservation_rent") @Getter @Setter
+@ToString(exclude = {"reservation", "employee", "car", "comment"}, callSuper = true)
 public class ReservationRent extends ParentEntity {
 
     @OneToOne @JoinColumn(name="reservation_id")
     private Reservation reservation;
 
     @OneToOne @JoinColumn(name="employee_id")
-    private Employee employee;
+    private Employee employee; // set the currently logged in when the vehicle is released
 
     @ManyToOne
     private Car car;
 
-    private LocalDateTime rentDate;
+    private LocalDateTime realRentDate;
 
     private String comment;
 

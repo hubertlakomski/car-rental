@@ -12,7 +12,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="departments") @Getter @Setter @ToString
+@Table(name="departments") @Getter @Setter
+@ToString(exclude = {"address", "employees", "cars"}, callSuper = true)
 public class Department extends ParentEntity{
 
     @Column(nullable = false, unique = true)

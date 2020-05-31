@@ -20,7 +20,7 @@
             <form:select path="rentedCar"
                          items="${data.availableCarsInDepartment}"
                          itemValue="id"
-                         itemLabel="plate_number"
+                         itemLabel="carDescription"
                          multiple="false" />
             <form:errors path="rentedCar"/>
         </p>

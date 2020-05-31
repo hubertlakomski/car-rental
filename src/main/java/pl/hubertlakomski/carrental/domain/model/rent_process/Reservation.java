@@ -13,7 +13,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="reservations") @Getter @Setter @ToString
+@Table(name="reservations") @Getter @Setter
+@ToString(exclude = {
+        "client", "sippCode", "rentDepartment", "plannedReturnDepartment", "rentData", "returnData"}, callSuper = true)
 public class Reservation extends ParentEntity {
 
     @CreatedDate
@@ -36,15 +38,17 @@ public class Reservation extends ParentEntity {
     @OneToOne @JoinColumn(name="rent_department_id")
     private Department rentDepartment;
 
-    @OneToOne @JoinColumn(name="return_department_id")
-    private Department returnDepartment;
+    @OneToOne @JoinColumn(name="planned_return_department_id")
+    private Department plannedReturnDepartment;
 
-    private Long plannedCharge;
-    private Long deposit;
+    private Long plannedRentalFee;
+    //rental fee: perDay(number of rental days from the beginning and end of the rental)*amount(from sipp code)
 
     @OneToOne @JoinColumn(name="rent_data_id")
-    private ReservationRent rentData = new ReservationRent();
+    private ReservationRent rentData;
 
     @OneToOne @JoinColumn(name="return_data_id")
-    private ReservationReturn returnData = new ReservationReturn();
+    private ReservationReturn returnData;
+
+    //TODO prePersist na plannedRentalFee
 }

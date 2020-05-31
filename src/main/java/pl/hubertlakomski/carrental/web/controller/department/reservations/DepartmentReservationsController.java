@@ -1,19 +1,19 @@
-package pl.hubertlakomski.carrental.web.controller.reservation.department;
+package pl.hubertlakomski.carrental.web.controller.department.reservations;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.hubertlakomski.carrental.service.reservations.department.ReservationDepartmentService;
+import pl.hubertlakomski.carrental.service.department.reservations.DepartmentReservationsService;
 
 @Controller
-@RequestMapping("/reservations/department")
-public class ReservationDepartmentController {
+@RequestMapping("/department/reservations")
+public class DepartmentReservationsController {
 
-    private final ReservationDepartmentService departmentReservationsService;
+    private final DepartmentReservationsService departmentReservationsService;
 
-    public ReservationDepartmentController(ReservationDepartmentService departmentReservationsService) {
+    public DepartmentReservationsController(DepartmentReservationsService departmentReservationsService) {
         this.departmentReservationsService = departmentReservationsService;
     }
 

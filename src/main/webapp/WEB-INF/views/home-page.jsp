@@ -34,8 +34,8 @@
                     <c:forEach items="${homePageData}" var="data">
                         <tr>
                             <td>${data.departmentCode}</td>
-                            <td><a href="/reservations/department?id=${data.departmentId}">zobacz</a></td>
-                            <td><a href="/plannedReturns/department?id=${data.departmentId}">zobacz</a></td>
+                            <td><a href="/department/reservations?id=${data.departmentId}">zobacz</a></td>
+                            <td><a href="/department/returns?id=${data.departmentId}">zobacz</a></td>
                             <td><a href="/cars/department?id=${data.departmentId}">zobacz</a></td>
                             <td><a href="/employees/department?id=${data.departmentId}">zobacz</a></td>
                             <td><a href="/details/department?id=${data.departmentId}">zobacz</a></td>

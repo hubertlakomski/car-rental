@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Strona główna</title>
+    <title>Zwroty</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
@@ -13,20 +13,18 @@
 <jsp:include page="../header.jsp" />
 <section>
 
-    <a href="/reservations/add" class="button is-primary">Dodaj rezerwację</a>
     <div class="container">
-        <h1 class="title">Rezerwacje oddziału ${departmentCode}</h1>
+        <h1 class="title">Zwroty oddziału ${departmentCode}</h1>
         <table class="table">
             <thead>
             <tr>
                 <th>Numer rezerwacji</th>
-                <th>SIPP</th>
-                <th>Planowana data wypożyczenia</th>
+                <th>Data wypożyczenia</th>
                 <th>Planowana data zwrotu</th>
-                <th>Oddział zwrotu</th>
+                <th>Info z oddziału wydania</th>
+                <th>SIPP</th>
+                <th>Samochód</th>
                 <th>Klient</th>
-                <th>Cena wynajmu</th>
-                <th>Depozyt</th>
                 <th>Akcje</th>
             </tr>
             </thead>
@@ -34,15 +32,13 @@
             <c:forEach items="${data}" var="data">
                 <tr>
                     <td>${data.reservationId}</td>
-                    <td>${data.sippCode}</td>
-                    <td>${data.plannedRentDate}</td>
+                    <td>${data.realRentDate}</td>
                     <td>${data.plannedReturnDate}</td>
-                    <td>${data.returnDepartmentCode}</td>
+                    <td>${data.rentComment}</td>
+                    <td>${data.sippCode}</td>
+                    <td><a href="/car?id=${data.carId}">${data.carDescription}</a></td>
                     <td><a href="/client?id=${data.clientId}">${data.clientFullName}</a></td>
-                    <td>${data.plannedCharge}</td>
-                    <td>${data.deposit}</td>
-                    <td><a href="/reservations/rent?id=${data.reservationId}">wypożycz</a>
-                    <a href="/reservations/edit?id=${data.reservationId}">edytuj</a></td>
+                    <td><a href="/reservations/return?id=${data.reservationId}">przyjmij zwrot</a></td>
                 </tr>
             </c:forEach>
             </tfoot>

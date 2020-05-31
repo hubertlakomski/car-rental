@@ -1,4 +1,4 @@
-package pl.hubertlakomski.carrental.service.reservations.department;
+package pl.hubertlakomski.carrental.service.department.reservations;
 
 import org.springframework.stereotype.Service;
 import pl.hubertlakomski.carrental.domain.model.rent_process.Reservation;
@@ -11,29 +11,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class DefaultReservationDepartmentService implements ReservationDepartmentService {
+public class DefaultDepartmentReservationsService implements DepartmentReservationsService {
 
     private final ReservationRepository reservationRepository;
     private final DepartmentRepository departmentRepository;
 
-    public DefaultReservationDepartmentService(ReservationRepository reservationRepository, DepartmentRepository departmentRepository) {
+    public DefaultDepartmentReservationsService(ReservationRepository reservationRepository, DepartmentRepository departmentRepository) {
         this.reservationRepository = reservationRepository;
         this.departmentRepository = departmentRepository;
     }
 
     @Transactional
     @Override
-    public List<ReservationDepartmentData> reservationsInDepartment(Long departmentId) {
+    public List<DepartmentReservationsData> reservationsInDepartment(Long departmentId) {
 
-        List<ReservationDepartmentData> data = new ArrayList<>();
+        List<DepartmentReservationsData> data = new ArrayList<>();
         List<Reservation> departmentReservations =
-                reservationRepository.findAllByRentDepartmentIdOrderByPlannedRentDate(departmentId);
+                reservationRepository.findAllByRentDepartment(departmentRepository.getOne(departmentId));
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
         for(Reservation reservation: departmentReservations){
 
-            ReservationDepartmentData reservationData = new ReservationDepartmentData();
+            DepartmentReservationsData reservationData = new DepartmentReservationsData();
 
             reservationData.setPlannedRentDate(reservation.getPlannedRentDate().format(formatter));
             reservationData.setPlannedReturnDate(reservation.getPlannedReturnDate().format(formatter));
@@ -44,13 +44,13 @@ public class DefaultReservationDepartmentService implements ReservationDepartmen
             reservationData.setClientFullName(reservation.getClient().getFirstName()+" "+
                     reservation.getClient().getLastName());
 
-            reservationData.setReturnDepartmentId(reservation.getReturnDepartment().getId());
-            reservationData.setReturnDepartmentCode(reservation.getReturnDepartment().getCode());
+            reservationData.setReturnDepartmentId(reservation.getPlannedReturnDepartment().getId());
+            reservationData.setReturnDepartmentCode(reservation.getPlannedReturnDepartment().getCode());
 
             reservationData.setSippCode(reservation.getSippCode().getCode());
+            reservationData.setDeposit(reservation.getSippCode().getDeposit());
 
-            reservationData.setDeposit(reservation.getDeposit());
-            reservationData.setPlannedCharge(reservation.getPlannedCharge());
+            reservationData.setPlannedCharge(reservation.getPlannedRentalFee());
 
             data.add(reservationData);
         }

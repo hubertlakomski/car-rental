@@ -2,6 +2,7 @@ package pl.hubertlakomski.carrental.service.reservations.rent;
 
 import org.springframework.stereotype.Service;
 import pl.hubertlakomski.carrental.domain.model.car.Car;
+import pl.hubertlakomski.carrental.domain.model.rent_process.Reservation;
 import pl.hubertlakomski.carrental.domain.model.rent_process.ReservationRent;
 import pl.hubertlakomski.carrental.domain.repository.*;
 
@@ -16,15 +17,17 @@ public class DefaultReservationRentService implements ReservationRentService {
     private final ReservationRepository reservationRepository;
     private final EmployeeRepository employeeRepository;
     private final CarRepository carRepository;
-    private final DepartmentRepository departmentRepository;
 
-    public DefaultReservationRentService(ReservationRentRepository reservationRentRepository, ReservationRepository reservationRepository, EmployeeRepository employeeRepository, CarRepository carRepository, DepartmentRepository departmentRepository) {
+    public DefaultReservationRentService(ReservationRentRepository reservationRentRepository,
+                                         ReservationRepository reservationRepository,
+                                         EmployeeRepository employeeRepository,
+                                         CarRepository carRepository) {
         this.reservationRentRepository = reservationRentRepository;
         this.reservationRepository = reservationRepository;
         this.employeeRepository = employeeRepository;
         this.carRepository = carRepository;
-        this.departmentRepository = departmentRepository;
     }
+
 
     @Transactional
     @Override
@@ -43,11 +46,11 @@ public class DefaultReservationRentService implements ReservationRentService {
 
     @Transactional
     @Override
-    public void rentCar(ReservationRentData reservationRentData) {
+    public void processData(ReservationRentData reservationRentData) {
 
         ReservationRent reservationRent = new ReservationRent();
 
-        reservationRent.setRentDate(reservationRentData.getRentDate());
+        reservationRent.setRealRentDate(reservationRentData.getRentDate());
         reservationRent.setComment(reservationRentData.getComment());
 
         reservationRent.setEmployee(employeeRepository
@@ -56,6 +59,13 @@ public class DefaultReservationRentService implements ReservationRentService {
                 .getOne(reservationRentData.getReservationId()));
 
         reservationRentRepository.save(reservationRent);
+
+        Reservation reservation =
+                reservationRepository.
+                        getOne(reservationRent.getReservation().getId());
+
+        reservation.setRentData(reservationRent); //save reservation_rent_id to main reservation
+
     }
 
 

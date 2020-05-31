@@ -11,7 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="employees") @Getter @Setter @ToString
+@Table(name="employees") @Getter @Setter
+@ToString(exclude = "department", callSuper = true)
 public class Employee extends ParentEntity {
 
     private String firstName;

@@ -10,19 +10,20 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name="reservation_return") @Getter @Setter @ToString
+@Table(name="reservation_return") @Getter @Setter
+@ToString(exclude = {"reservation", "employee"}, callSuper = true)
 public class ReservationReturn extends ParentEntity {
 
     @OneToOne @JoinColumn(name="reservation_id")
     private Reservation reservation;
 
     @OneToOne @JoinColumn(name="employee_id")
-    private Employee employee;
+    private Employee employee; // set the currently logged in when returning the vehicle
 
-    private LocalDateTime returnDate;
+    private LocalDateTime realReturnDate;
 
-    private Long surcharge;
-    private Long depositCharge;
+    private Long realRentalFee; //setting by employee
+    private Long depositCharge; //seeting by employee
 
     private String comment;
 

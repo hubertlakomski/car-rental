@@ -12,7 +12,8 @@ import javax.validation.constraints.Email;
 import java.util.Set;
 
 @Entity
-@Table(name="clients") @Getter @Setter @ToString
+@Table(name="clients") @Getter @Setter
+@ToString(exclude = {"address", "reservations"}, callSuper = true)
 public class Client extends ParentEntity {
 
     @Column(nullable = false)

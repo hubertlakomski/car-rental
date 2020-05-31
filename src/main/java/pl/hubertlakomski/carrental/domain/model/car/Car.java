@@ -13,7 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name="cars") @Getter @Setter @ToString
+@Table(name="cars") @Getter @Setter
+@ToString(exclude = {"sippCode", "status", "reservationsRent", "department"}, callSuper = true)
 public class Car extends ParentEntity {
 
     @ManyToOne @JoinColumn(name = "sipp_code_id")
@@ -38,8 +39,6 @@ public class Car extends ParentEntity {
 
     @OneToOne @JoinColumn(name = "status_id")
     private Status status; // must be actualized by every reservation or other operation
-
-    private Long amount; // per day
 
     @OneToMany(mappedBy = "car")
     private Set<ReservationRent> reservationsRent = new HashSet<>(); // must be actualized by every reservation
