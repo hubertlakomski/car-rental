@@ -2,11 +2,13 @@ package pl.hubertlakomski.carrental.service.reservations.rent;
 
 import org.springframework.stereotype.Service;
 import pl.hubertlakomski.carrental.domain.model.car.Car;
+import pl.hubertlakomski.carrental.domain.model.car.Status;
 import pl.hubertlakomski.carrental.domain.model.rent_process.Reservation;
 import pl.hubertlakomski.carrental.domain.model.rent_process.ReservationRent;
 import pl.hubertlakomski.carrental.domain.repository.*;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,28 +19,32 @@ public class DefaultReservationRentService implements ReservationRentService {
     private final ReservationRepository reservationRepository;
     private final EmployeeRepository employeeRepository;
     private final CarRepository carRepository;
+    private final StatusRepository statusRepository;
 
     public DefaultReservationRentService(ReservationRentRepository reservationRentRepository,
                                          ReservationRepository reservationRepository,
                                          EmployeeRepository employeeRepository,
-                                         CarRepository carRepository) {
+                                         CarRepository carRepository, StatusRepository statusRepository) {
         this.reservationRentRepository = reservationRentRepository;
         this.reservationRepository = reservationRepository;
         this.employeeRepository = employeeRepository;
         this.carRepository = carRepository;
+        this.statusRepository = statusRepository;
     }
-
 
     @Transactional
     @Override
     public ReservationRentData prepareData(Long reservationId) {
 
+        Reservation reservation = reservationRepository.getOne(reservationId);
+
+        if(reservation.getRentData()!=null){
+            throw new IllegalStateException("The reservation has already been rented");
+        }
+
         ReservationRentData reservationRentData = new ReservationRentData();
 
-        List<ReservationRentCarData> availableInDepartmentData = getReservationRentCarData(reservationId);
-
-        reservationRentData.setReservationId(reservationId);
-        reservationRentData.setAvailableCarsInDepartment(availableInDepartmentData);
+        reservationRentData.setReservationId(reservation.getId());
 
         return reservationRentData;
     }
@@ -50,11 +56,20 @@ public class DefaultReservationRentService implements ReservationRentService {
 
         ReservationRent reservationRent = new ReservationRent();
 
-        reservationRent.setRealRentDate(reservationRentData.getRentDate());
-        reservationRent.setComment(reservationRentData.getComment());
+            reservationRent.setRealRentDate(LocalDateTime.parse(reservationRentData.getRentDate()));
 
-        reservationRent.setEmployee(employeeRepository
-                .getOne(reservationRentData.getEmployeeId()));
+            reservationRent.setComment(reservationRentData.getComment());
+
+            Car rentedCar = carRepository.getOne(reservationRentData.getRentedCarId());
+            reservationRent.setCar(rentedCar);
+
+            Status status = statusRepository.getOne(rentedCar.getStatus().getId());
+
+            status.setAvailable(false);
+            status.setRented(true);
+
+    //        reservationRent.setEmployee(employeeRepository
+    //                .getOne(reservationRentData.getEmployeeId())); //get from security
 
         reservationRentRepository.save(reservationRent);
 
@@ -67,15 +82,15 @@ public class DefaultReservationRentService implements ReservationRentService {
     }
 
 
-    private List<ReservationRentCarData> getReservationRentCarData(Long reservationId) {
+    public List<ReservationRentCarData> getAvailableCarsInDepartment(Long reservationId) {
 
         Long departmentId =
                 reservationRepository.
-                        getOne(reservationId)
+                        getReservationById(reservationId)
                         .getRentDepartment().getId();
 
         List<Car> availableInDepartment =
-                carRepository.findAllByDepartmentId(departmentId);
+                carRepository.findAllByDepartmentIdAndStatus_AvailableIsTrue(departmentId);
 
         List<ReservationRentCarData> availableInDepartmentData = new ArrayList<>();
 
@@ -88,6 +103,7 @@ public class DefaultReservationRentService implements ReservationRentService {
                 data.setId(car.getId());
                 data.setModel(car.getModel());
                 data.setPlateNumber(car.getPlateNumber());
+                data.setSippCode(car.getSippCode().getCode());
 
                 availableInDepartmentData.add(data);
             }

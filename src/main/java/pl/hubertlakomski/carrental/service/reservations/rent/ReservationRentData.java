@@ -13,20 +13,17 @@ import java.util.List;
 @Data @ToString
 public class ReservationRentData {
 
-    @NotNull @NotBlank
-    private LocalDateTime rentDate; //actual rental time
+    @NotNull
+    private String rentDate; //actual rental time
 
     @NotNull
     private Long reservationId;
 
-    @NotBlank @NotNull
-    private ReservationRentCarData rentedCar;
+    @NotNull
+    private Long rentedCarId;
 
     private Long employeeId; //get from security
 
     @Size(max=500)
     private String comment;
-
-    private List<ReservationRentCarData> availableCarsInDepartment
-            = new ArrayList<>();
 }

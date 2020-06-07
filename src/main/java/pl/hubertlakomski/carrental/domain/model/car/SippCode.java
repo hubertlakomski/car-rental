@@ -22,4 +22,5 @@ public class SippCode extends ParentEntity {
     @Column(nullable = false)
     private Long perDayCharge;
 
+
 }

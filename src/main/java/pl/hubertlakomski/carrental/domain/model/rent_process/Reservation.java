@@ -3,7 +3,7 @@ package pl.hubertlakomski.carrental.domain.model.rent_process;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.annotation.CreatedDate;
+import org.hibernate.annotations.CreationTimestamp;
 import pl.hubertlakomski.carrental.domain.model.car.SippCode;
 import pl.hubertlakomski.carrental.domain.model.Client;
 import pl.hubertlakomski.carrental.domain.model.Department;
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
         "client", "sippCode", "rentDepartment", "plannedReturnDepartment", "rentData", "returnData"}, callSuper = true)
 public class Reservation extends ParentEntity {
 
-    @CreatedDate
+    @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime created;
 
@@ -27,7 +27,7 @@ public class Reservation extends ParentEntity {
 
     @ManyToOne @JoinColumn(name="sipp_code_id")
     private SippCode sippCode;
-    // when booking, the employee provides the SIPP code not concrete car
+    //when booking, the employee provides the SIPP code not concrete car
 
     @Column(nullable = false)
     private LocalDateTime plannedRentDate;
@@ -49,6 +49,8 @@ public class Reservation extends ParentEntity {
 
     @OneToOne @JoinColumn(name="return_data_id")
     private ReservationReturn returnData;
+
+    private String comment;
 
     //TODO prePersist na plannedRentalFee
 }

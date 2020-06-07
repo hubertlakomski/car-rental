@@ -18,16 +18,10 @@ public class DefaultDepartmentReturnsService implements DepartmentReturnsService
 
     private final ReservationRepository reservationRepository;
     private final DepartmentRepository departmentRepository;
-    private final ReservationRentRepository reservationRentRepository;
-    private final ClientRepository clientRepository;
-    private final CarRepository carRepository;
 
-    public DefaultDepartmentReturnsService(ReservationRepository reservationRepository, DepartmentRepository departmentRepository, ReservationRentRepository reservationRentRepository, ClientRepository clientRepository, CarRepository carRepository) {
+    public DefaultDepartmentReturnsService(ReservationRepository reservationRepository, DepartmentRepository departmentRepository, ReservationRentRepository reservationRentRepository) {
         this.reservationRepository = reservationRepository;
         this.departmentRepository = departmentRepository;
-        this.reservationRentRepository = reservationRentRepository;
-        this.clientRepository = clientRepository;
-        this.carRepository = carRepository;
     }
 
     @Transactional
@@ -38,7 +32,7 @@ public class DefaultDepartmentReturnsService implements DepartmentReturnsService
 
         List<Reservation> departmentReturns =
                 reservationRepository.
-                        findAllByPlannedReturnDepartment(departmentRepository.getOne(departmentId));
+                        findAllByPlannedReturnDepartmentIdAndReturnDataIsNullOrderByPlannedReturnDate(departmentId);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
@@ -48,8 +42,7 @@ public class DefaultDepartmentReturnsService implements DepartmentReturnsService
 
             departmentReturnsData.setReservationId(reservation.getId());
 
-            Client client =
-                    clientRepository.getOne(reservation.getClient().getId());
+            Client client = reservation.getClient();
 
             departmentReturnsData.setClientId(client.getId());
             departmentReturnsData.setClientFullName(
@@ -57,24 +50,28 @@ public class DefaultDepartmentReturnsService implements DepartmentReturnsService
                     +" "+
                     client.getLastName());
 
-            ReservationRent reservationRent =
-                    reservationRentRepository.getOne(reservation.getRentData().getId());
 
-            Car car =
-                    carRepository.getOne(reservationRent.getCar().getId());
+            ReservationRent reservationRent = reservation.getRentData();
 
-            departmentReturnsData.setCarDescription(
-                    car.getBrand()
-                    +" "+
-                    car.getModel());
+            if(reservationRent!=null){
+                Car car = reservationRent.getCar();
 
-            departmentReturnsData.setCarId(car.getId());
+                departmentReturnsData.setCarDescription(
+                        car.getBrand()
+                                +" "+
+                                car.getModel());
+
+                departmentReturnsData.setCarId(car.getId());
+
+                departmentReturnsData.setRealRentDate(reservationRent.getRealRentDate().format(formatter));
+
+                departmentReturnsData.setRentComment(reservationRent.getComment());
+            }
+
+
+            departmentReturnsData.setPlannedReturnDate(reservation.getPlannedReturnDate().format(formatter));
 
             departmentReturnsData.setSippCode(reservation.getSippCode().getCode());
-
-            departmentReturnsData.setRealRentDate(reservationRent.getRealRentDate().format(formatter));
-
-            departmentReturnsData.setRentComment(reservationRent.getComment());
 
             data.add(departmentReturnsData);
         }

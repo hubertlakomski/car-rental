@@ -5,16 +5,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Zwroty</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <title>Zwroty/${departmentCode}/bieżące</title>
 </head>
 <body>
 <jsp:include page="../header.jsp" />
-<section>
-
-    <div class="container">
-        <h1 class="title">Zwroty oddziału ${departmentCode}</h1>
+    <div class="container is-widescreen">
+        <div class="notification">
+        <h1 class="title">Bieżące zwroty oddziału - ${departmentCode}</h1>
         <table class="table">
             <thead>
             <tr>
@@ -25,7 +22,7 @@
                 <th>SIPP</th>
                 <th>Samochód</th>
                 <th>Klient</th>
-                <th>Akcje</th>
+                <th></th>
             </tr>
             </thead>
             <tfoot>
@@ -38,13 +35,13 @@
                     <td>${data.sippCode}</td>
                     <td><a href="/car?id=${data.carId}">${data.carDescription}</a></td>
                     <td><a href="/client?id=${data.clientId}">${data.clientFullName}</a></td>
-                    <td><a href="/reservations/return?id=${data.reservationId}">przyjmij zwrot</a></td>
+                    <td><a href="/reservation?id=${data.reservationId}" class="button is-info">Szczegóły</a></td>
                 </tr>
             </c:forEach>
             </tfoot>
         </table>
+        </div>
     </div>
-</section>
 <jsp:include page="../footer.jsp" />
 </body>
 </html>

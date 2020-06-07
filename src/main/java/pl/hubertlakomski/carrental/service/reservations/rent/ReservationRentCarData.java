@@ -13,8 +13,9 @@ public class ReservationRentCarData {
     private String brand;
     private String model;
     private String plateNumber;
+    private String sippCode;
 
     public String getCarDescription() {
-        return plateNumber+" "+brand+" "+model;
+        return sippCode+"/"+brand+" "+model+"/"+plateNumber;
     }
 }

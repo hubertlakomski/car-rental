@@ -6,14 +6,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Szczegóły klienta ${data.firstName} ${data.lastName}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
 <jsp:include page="../../header.jsp" />
 <section>
-
-    <a href="/client/add" class="button is-primary">Dodaj klienta</a>
     <div class="container">
         <h1 class="title">Klient ${data.firstName} ${data.lastName}</h1>
         <table class="table">
@@ -38,6 +34,7 @@
                 </tr>
             </tfoot>
         </table>
+        <a href="/client/add" class="button is-primary">Dodaj klienta</a>
     </div>
 </section>
 <jsp:include page="../../footer.jsp" />

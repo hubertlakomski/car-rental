@@ -5,17 +5,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Strona główna</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <title>Rezerwacje/${departmentCode}/bieżące</title>
 </head>
 <body>
 <jsp:include page="../header.jsp" />
-<section>
 
-    <a href="/reservations/add" class="button is-primary">Dodaj rezerwację</a>
-    <div class="container">
-        <h1 class="title">Rezerwacje oddziału ${departmentCode}</h1>
+    <div class="container is-widescreen">
+        <div class="notification">
+        <h1 class="title">Bieżące rezerwacje oddziału - ${departmentCode} </h1>
         <table class="table">
             <thead>
             <tr>
@@ -23,11 +20,11 @@
                 <th>SIPP</th>
                 <th>Planowana data wypożyczenia</th>
                 <th>Planowana data zwrotu</th>
-                <th>Oddział zwrotu</th>
+                <th>Plaowany oddział zwrotu</th>
                 <th>Klient</th>
-                <th>Cena wynajmu</th>
+                <th>Planowana cena wynajmu</th>
                 <th>Depozyt</th>
-                <th>Akcje</th>
+                <th></th>
             </tr>
             </thead>
             <tfoot>
@@ -41,14 +38,14 @@
                     <td><a href="/client?id=${data.clientId}">${data.clientFullName}</a></td>
                     <td>${data.plannedCharge}</td>
                     <td>${data.deposit}</td>
-                    <td><a href="/reservations/rent?id=${data.reservationId}">wypożycz</a>
-                    <a href="/reservations/edit?id=${data.reservationId}">edytuj</a></td>
+                    <td><a href="/reservation?id=${data.reservationId}" class="button is-info">Szczegóły</a></td>
                 </tr>
             </c:forEach>
             </tfoot>
         </table>
+        <a href="/reservations/add" class="button is-primary">Dodaj rezerwację</a>
+        </div>
     </div>
-</section>
 <jsp:include page="../footer.jsp" />
 </body>
 </html>

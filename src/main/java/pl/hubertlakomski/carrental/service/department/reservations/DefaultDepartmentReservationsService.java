@@ -27,7 +27,7 @@ public class DefaultDepartmentReservationsService implements DepartmentReservati
 
         List<DepartmentReservationsData> data = new ArrayList<>();
         List<Reservation> departmentReservations =
-                reservationRepository.findAllByRentDepartment(departmentRepository.getOne(departmentId));
+                reservationRepository.findAllByRentDepartmentIdAndRentDataIsNullOrderByPlannedRentDate(departmentId);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 

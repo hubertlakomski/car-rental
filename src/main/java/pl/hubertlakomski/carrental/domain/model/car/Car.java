@@ -7,7 +7,6 @@ import pl.hubertlakomski.carrental.domain.model.Department;
 import pl.hubertlakomski.carrental.domain.model.ParentEntity;
 
 import javax.persistence.*;
-import java.time.Year;
 
 @Entity
 @Table(name="cars") @Getter @Setter
@@ -27,7 +26,7 @@ public class Car extends ParentEntity {
     private String model;
 
     @Column(nullable = false)
-    private Year production;
+    private Integer production;
 
     private String color;
 

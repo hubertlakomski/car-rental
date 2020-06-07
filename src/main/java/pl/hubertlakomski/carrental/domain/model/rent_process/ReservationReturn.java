@@ -3,6 +3,7 @@ package pl.hubertlakomski.carrental.domain.model.rent_process;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import pl.hubertlakomski.carrental.domain.model.Department;
 import pl.hubertlakomski.carrental.domain.model.users.Employee;
 import pl.hubertlakomski.carrental.domain.model.ParentEntity;
 
@@ -18,6 +19,9 @@ public class ReservationReturn extends ParentEntity {
     private Employee employee; // set the currently logged in when returning the vehicle
 
     private LocalDateTime realReturnDate;
+
+    @OneToOne @JoinColumn(name="real_return_department_id")
+    private Department realReturnDepartment;
 
     private Long realRentalFee; //setting by employee
     private Long depositCharge; //seeting by employee

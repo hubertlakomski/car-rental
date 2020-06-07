@@ -2,27 +2,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rent car</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <title>Rezerwacje/wypożycz/${reservationRentData.reservationId}</title>
 </head>
 <body>
-<jsp:include page="../header.jsp" />
+<jsp:include page="../../header.jsp" />
 <div>
-    <form:form method="post" modelAttribute="data">
+    <form:form method="post" modelAttribute="reservationRentData">
         <p>
             Nr rejestracyjny samochodu:
-            <form:select path="rentedCar"
-                         items="${data.availableCarsInDepartment}"
-                         itemValue="id"
+            <form:select itemValue="id"
                          itemLabel="carDescription"
+                         path="rentedCarId" items="${availableCarsInDepartment}"
                          multiple="false" />
-            <form:errors path="rentedCar"/>
+            <form:errors path="rentedCarId"/>
         </p>
         <p>
             <form:label path="rentDate">Faktyczny czas wypożyczenia:
@@ -35,15 +31,15 @@
             <form:errors path="comment" cssClass="error"/>
         </p>
 
-        <form:input  type="hidden"  path="reservationId" value="${data.reservationId}"/>
+        <form:input  type="hidden"  path="reservationId" value="${reservationRentData.reservationId}"/>
 
         <p>
         <div class="control">
-            <form:button class="button is-primary" type="submit">Wypożycz</form:button>
+            <form:button class="button is-link" type="submit">Zatwierdź</form:button>
         </div>
         </p>
     </form:form>
 </div>
-<jsp:include page="../footer.jsp" />
+<jsp:include page="../../footer.jsp" />
 </body>
 </html>
