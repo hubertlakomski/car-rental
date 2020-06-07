@@ -46,14 +46,14 @@
             <div class="field">
                 <form:label path="plannedRentDate" class="label">Planowany czas wypożyczenia</form:label>
                 <div class="control">
-                    <form:input path="plannedRentDate" type="datetime-local" required="required"/>
-                    <form:errors path="plannedRentDate"/>
+                        <form:input path="plannedRentDate" class="input is-fullwidth" type="datetime-local" required="required"/>
+                        <form:errors path="plannedRentDate"/>
                 </div>
             </div>
             <div class="field">
                 <form:label path="plannedReturnDate" class="label">Planowany czas zwrotu</form:label>
-                <div class="date">
-                        <form:input path="plannedReturnDate" type="datetime-local" required="required"/>
+                <div class="control">
+                        <form:input path="plannedReturnDate" class="input is-fullwidth" type="datetime-local" required="required"/>
                         <form:errors path="plannedReturnDate"/>
                 </div>
             </div>
@@ -88,10 +88,8 @@
             <div class="field">
                 <label class="label">Komentarz</label>
                 <div class="control">
-                    <div class="textarea is-fullwidth">
-                        <form:textarea path="comment"/>
+                        <form:textarea class="textarea is-fullwidth" path="comment"/>
                         <form:errors path="comment" cssClass="error"/>
-                    </div>
                 </div>
             </div>
 

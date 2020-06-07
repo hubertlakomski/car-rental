@@ -1,5 +1,7 @@
 package pl.hubertlakomski.carrental.web.controller.reservation.add;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,13 +15,11 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("reservations/add")
+@Slf4j
+@RequiredArgsConstructor
 public class ReservationAddController {
 
-    private ReservationAddService reservationAddService;
-
-    public ReservationAddController(ReservationAddService reservationAddService) {
-        this.reservationAddService = reservationAddService;
-    }
+    private final ReservationAddService reservationAddService;
 
     @GetMapping
     public String prepareAddPage(Model model){
@@ -38,6 +38,8 @@ public class ReservationAddController {
         if(bindingResult.hasErrors()){
             return "reservation/add/page";
         }
+
+        log.info(data.getComment());
 
         Long reservationId = reservationAddService.processAddReservation(data);
 

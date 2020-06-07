@@ -6,5 +6,5 @@ import pl.hubertlakomski.carrental.domain.model.Client;
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
 
-
+    Client getById(Long id);
 }

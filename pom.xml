@@ -14,7 +14,7 @@
     <name>car-rental</name>
     <description>universal crm for car rentals</description>
 
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>11</java.version>

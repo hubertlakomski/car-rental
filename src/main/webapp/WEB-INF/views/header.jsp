@@ -1,9 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <link rel="stylesheet" href="/webjars/bulma/0.8.2/css/bulma.min.css">
 <link rel="stylesheet" href="webjars/bulma-calendar/6.0.7/dist/css/bulma-calendar.min.css">
-<script src=""
 
 <nav class="navbar"  role="navigation" aria-label="main navigation">
     <div class="navbar-brand">

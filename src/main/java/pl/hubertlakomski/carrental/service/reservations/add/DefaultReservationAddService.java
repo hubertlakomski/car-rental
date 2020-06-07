@@ -1,5 +1,6 @@
 package pl.hubertlakomski.carrental.service.reservations.add;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import pl.hubertlakomski.carrental.domain.model.Client;
@@ -21,19 +22,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service @Slf4j
+@RequiredArgsConstructor
 public class DefaultReservationAddService implements ReservationAddService {
 
     private final ClientRepository clientRepository;
     private final DepartmentRepository departmentRepository;
     private final SippCodeRepository sippCodeRepository;
     private final ReservationRepository reservationRepository;
-
-    public DefaultReservationAddService(ClientRepository clientRepository, DepartmentRepository departmentRepository, SippCodeRepository sippCodeRepository, ReservationRepository reservationRepository) {
-        this.clientRepository = clientRepository;
-        this.departmentRepository = departmentRepository;
-        this.sippCodeRepository = sippCodeRepository;
-        this.reservationRepository = reservationRepository;
-    }
 
     @Transactional
     @Override
@@ -54,7 +49,11 @@ public class DefaultReservationAddService implements ReservationAddService {
                 reservation.getPlannedReturnDate(),
                 reservation.getSippCode()));
 
+        log.info("Przed zapisem {}",reservationAddData.getComment());
+
         reservationRepository.save(reservation);
+
+        log.info("Po zapisie {}", reservationRepository.getReservationById(reservation.getId()).getComment());
 
         return reservation.getId();
     }

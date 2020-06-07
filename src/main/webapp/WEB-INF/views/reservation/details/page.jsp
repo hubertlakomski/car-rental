@@ -9,6 +9,8 @@
 </head>
 <body>
 <jsp:include page="../../header.jsp" />
+<div class="container">
+    <div class="notification is-fullwidth">
         <h1 class="title">Szczegóły rezerwacji</h1>
         <table class="table">
             <tr>
@@ -68,6 +70,9 @@
         </table>
         <a href="/reservations/rent?reservationId=${data.reservationId}" class="button is-success">Wypożycz</a>
         <a href="/reservations/return?reservationId=${data.reservationId}" class="button is-danger">Przyjmij zwrot</a>
+    </div>
+</div>
+
 <jsp:include page="../../footer.jsp" />
 </body>
 </html>
