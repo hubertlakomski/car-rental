@@ -1,5 +1,6 @@
 package pl.hubertlakomski.carrental.web.controller;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +15,10 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/register") @Slf4j
+@RequiredArgsConstructor
 public class RegistrationController {
 
     private final RegistrationService registrationService;
-
-    public RegistrationController(RegistrationService registrationService) {
-        this.registrationService = registrationService;
-    }
 
     @GetMapping
     public String prepareRegistrationPage(Model model){

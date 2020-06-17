@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface CarRepository extends JpaRepository<Car, Long> {
 
-    List<Car> findAllByDepartmentIdAndStatus_AvailableIsTrue(Long departmentId);
+    List<Car> findAllByDepartmentIdAndStatusNameEquals(Long departmentId, String statusName);
 
 }

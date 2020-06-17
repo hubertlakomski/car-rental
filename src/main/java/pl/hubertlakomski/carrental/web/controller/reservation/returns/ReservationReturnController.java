@@ -1,5 +1,6 @@
 package pl.hubertlakomski.carrental.web.controller.reservation.returns;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,16 +15,12 @@ import pl.hubertlakomski.carrental.service.reservations.returns.ReservationRetur
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("/reservations/return")
+@RequestMapping("/reservation/return")
+@RequiredArgsConstructor
 public class ReservationReturnController {
 
     private final ReservationReturnService reservationReturnService;
     private final ReservationAddService reservationAddService;
-
-    public ReservationReturnController(ReservationReturnService reservationReturnService, ReservationAddService reservationAddService) {
-        this.reservationReturnService = reservationReturnService;
-        this.reservationAddService = reservationAddService;
-    }
 
     @GetMapping
     public String prepareReturnReservationPage(@RequestParam Long reservationId, Model model){

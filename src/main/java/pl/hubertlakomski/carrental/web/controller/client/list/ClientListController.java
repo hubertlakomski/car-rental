@@ -8,9 +8,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.hubertlakomski.carrental.domain.repository.ClientRepository;
-import pl.hubertlakomski.carrental.service.client.ClientData;
-import pl.hubertlakomski.carrental.service.client.ClientService;
+import pl.hubertlakomski.carrental.service.client.add.ClientAddData;
+import pl.hubertlakomski.carrental.service.client.add.ClientAddService;
+import pl.hubertlakomski.carrental.service.client.edit.ClientEditData;
+import pl.hubertlakomski.carrental.service.client.edit.ClientEditService;
 
 import pl.hubertlakomski.carrental.service.client.list.ClientListService;
 
@@ -23,8 +24,8 @@ import javax.validation.Valid;
 public class ClientListController {
 
     private final ClientListService clientListService;
-    private final ClientService clientService;
-    private final ClientRepository clientRepository;
+    private final ClientEditService clientEditService;
+    private final ClientAddService clientAddService;
 
     @GetMapping
     public String prepareClientListPage(Model model){
@@ -35,7 +36,7 @@ public class ClientListController {
     }
 
     @PostMapping(params={"edit", "id"})
-    public String editClientDetails(@Valid ClientData clientData,
+    public String editClientDetails(@Valid ClientEditData clientEditData,
             BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
@@ -43,7 +44,22 @@ public class ClientListController {
             return "client/list/page";
         }
 
-        clientService.updateClient(clientData);
+        clientEditService.updateClient(clientEditData);
+
+
+        return "redirect:/clients";
+    }
+
+    @PostMapping(params={"add"})
+    public String editClientDetails(@Valid ClientAddData clientAddData,
+                                    BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+
+            return "client/list/page";
+        }
+
+        clientAddService.addClient(clientAddData);
 
 
         return "redirect:/clients";

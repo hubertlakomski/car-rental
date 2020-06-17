@@ -21,6 +21,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import static pl.hubertlakomski.carrental.service.car.list.DefaultCarListService.getDepartmentData;
+import static pl.hubertlakomski.carrental.service.car.list.DefaultCarListService.getSippCodeData;
+
 @Service @Slf4j
 @RequiredArgsConstructor
 public class DefaultReservationAddService implements ReservationAddService {
@@ -108,41 +111,14 @@ public class DefaultReservationAddService implements ReservationAddService {
     @Override
     public List<DepartmentData> getDepartments() {
 
-        List<Department> departments = departmentRepository.findAll();
-        List<DepartmentData> departmentDataList = new ArrayList<>();
-
-        for(Department department: departments){
-
-            DepartmentData departmentData = new DepartmentData();
-
-            departmentData.setAddress(department.getAddress());
-            departmentData.setCode(department.getCode());
-            departmentData.setId(department.getId());
-
-            departmentDataList.add(departmentData);
-        }
-
-        return departmentDataList;
+        return getDepartmentData(departmentRepository);
     }
 
     @Transactional
     @Override
     public List<SippCodeData> getSippCodes() {
 
-        List<SippCode> sippCodes = sippCodeRepository.findAll();
-        List<SippCodeData> sippCodeDataList = new ArrayList<>();
-
-        for(SippCode sippCode: sippCodes){
-
-            SippCodeData sippCodeData = new SippCodeData();
-
-            sippCodeData.setCode(sippCode.getCode());
-            sippCodeData.setId(sippCode.getId());
-
-            sippCodeDataList.add(sippCodeData);
-        }
-
-        return sippCodeDataList;
+        return getSippCodeData(sippCodeRepository);
     }
 
 

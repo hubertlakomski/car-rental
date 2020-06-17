@@ -1,4 +1,4 @@
-package pl.hubertlakomski.carrental.service.client;
+package pl.hubertlakomski.carrental.service.client.edit;
 
 import lombok.Data;
 import lombok.ToString;
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @ToString
-public class ClientData {
+public class ClientEditData {
 
     private Long id;
     @Email

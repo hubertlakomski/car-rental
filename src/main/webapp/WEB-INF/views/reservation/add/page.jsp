@@ -14,8 +14,6 @@
 <div class="container is-widescreen">
     <div class="notification">
         <form:form method="post" modelAttribute="reservationAddData">
-            <p>Przed rozpoczęciem rezerwacji zapytaj o nr klienta, jeżeli go nie ma utwórz go.</p>
-
             <div class="field">
                 <label class="label">Klient</label>
                 <div class="control">

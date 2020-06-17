@@ -22,7 +22,7 @@
 <footer class="footer">
     <div id="wrapper" class="content has-text-centered">
         <p>
-            <strong>Car Rental</strong> by Hubert Łakomski</a>.
+            <strong><a href="https://github.com/hubertlakomski/car-rental">CRS</a></strong> by<a href="https://github.com/hubertlakomski"> Hubert Łakomski</a>.
         </p>
     </div>
 </footer>

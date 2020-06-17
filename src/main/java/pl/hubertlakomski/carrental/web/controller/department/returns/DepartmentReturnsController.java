@@ -1,5 +1,6 @@
 package pl.hubertlakomski.carrental.web.controller.department.returns;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,14 +10,10 @@ import pl.hubertlakomski.carrental.service.department.returns.DepartmentReturnsS
 
 @Controller
 @RequestMapping("/department/returns")
+@RequiredArgsConstructor
 public class DepartmentReturnsController {
 
     private final DepartmentReturnsService departmentReturnsService;
-
-    public DepartmentReturnsController(DepartmentReturnsService departmentReturnsService) {
-        this.departmentReturnsService = departmentReturnsService;
-    }
-
 
     @GetMapping
     public String prepareDepartmentReservations(@RequestParam Long id, Model model){

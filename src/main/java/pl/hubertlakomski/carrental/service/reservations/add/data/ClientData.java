@@ -13,7 +13,7 @@ public class ClientData {
 
     public String getDescription(){
 
-        return "Id: "+id+", "+firstName+" "+lastName;
+        return firstName+" "+lastName+" (nr klienta: "+id+")";
     }
 
 }

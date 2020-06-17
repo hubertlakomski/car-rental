@@ -1,22 +1,25 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <link rel="stylesheet" href="/webjars/bulma/0.8.2/css/bulma.min.css">
 <link rel="stylesheet" href="webjars/bulma-calendar/6.0.7/dist/css/bulma-calendar.min.css">
 
-<nav class="navbar"  role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item" style="background-color: #090" href="/">
-            <img src="https://www.europcar.com.pl/resources/media_v4/NEW-Logo-size%20fit%20for%20header.png" width="112" height="28">
-        </a>
+<style>
+    #navbar-item {
+        background: url(https://www.autoeurope.eu/EUR/assets/Image/ico_driver.png) no-repeat center center;
+        background-size: cover;
+        width: 80px;
+        height: 80px;
+    }
+</style>
 
-        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
+
+<nav class="navbar is-transparent">
+    <div class="navbar-brand">
+        <a id="navbar-item" href="/"></a>
     </div>
 
-    <div id="navbarBasicExample" class="navbar-menu">
+    <div class="navbar-menu">
         <div class="navbar-start">
             <a class="navbar-item" href="/">
                 Home
@@ -45,8 +48,14 @@
                     <a class="navbar-item" href="/employees">
                         Employees
                     </a>
-                    <a class="navbar-item" href="/department/details">
-                        Department details
+                </div>
+            </div>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a href="/logout" class="button is-light">
+                        Wyloguj
                     </a>
                 </div>
             </div>

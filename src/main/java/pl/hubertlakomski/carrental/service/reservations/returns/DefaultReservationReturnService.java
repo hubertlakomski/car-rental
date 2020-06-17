@@ -1,5 +1,6 @@
 package pl.hubertlakomski.carrental.service.reservations.returns;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.hubertlakomski.carrental.domain.model.car.Status;
 import pl.hubertlakomski.carrental.domain.model.rent_process.Reservation;
@@ -15,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 
 
 @Service
+@RequiredArgsConstructor
 public class DefaultReservationReturnService implements ReservationReturnService {
 
 
@@ -22,14 +24,6 @@ public class DefaultReservationReturnService implements ReservationReturnService
     private final ReservationReturnRepository reservationReturnRepository;
     private final StatusRepository statusRepository;
     private final DepartmentRepository departmentRepository;
-
-    public DefaultReservationReturnService(ReservationRepository reservationRepository, ReservationReturnRepository reservationReturnRepository, StatusRepository statusRepository, DepartmentRepository departmentRepository) {
-        this.reservationRepository = reservationRepository;
-        this.reservationReturnRepository = reservationReturnRepository;
-        this.statusRepository = statusRepository;
-        this.departmentRepository = departmentRepository;
-    }
-
 
     @Transactional
     @Override
@@ -57,7 +51,7 @@ public class DefaultReservationReturnService implements ReservationReturnService
         reservationReturn.setComment(reservationReturnData.getComment());
         reservationReturn.setDepositCharge(reservationReturnData.getDepositCharge());
         reservationReturn.setRealRentalFee(reservationReturnData.getRealRentalFee());
-        reservationReturn.setRealReturnDate(LocalDateTime.parse(reservationReturnData.getRealReturnDate()));
+        reservationReturn.setRealReturnDate(LocalDateTime.now());
         reservationReturn.setRealReturnDepartment(departmentRepository
                 .getById(reservationReturnData.getRealReturnDepartmentId()));
 //        reservationReturn.setEmployee(employee from security);
@@ -71,10 +65,9 @@ public class DefaultReservationReturnService implements ReservationReturnService
         reservation.getRentData().getCar().setDepartment(reservation.getPlannedReturnDepartment());
         reservation.getRentData().getCar().setMileage(reservationReturnData.getMileage());
 
-        Status status = statusRepository.getOne(reservation.getRentData().getCar().getStatus().getId());
+        Status statusAvailable = statusRepository.findByName("available");
 
-        status.setRented(false);
-        status.setAvailable(true);
+        reservation.getRentData().getCar().setStatus(statusAvailable);
     }
 
     @Override
@@ -86,12 +79,13 @@ public class DefaultReservationReturnService implements ReservationReturnService
 
         Reservation reservation = reservationRepository.getReservationById(reservationId);
 
-        data.setComment(reservation.getRentData().getComment());
+        data.setRentComment(reservation.getRentData().getComment());
         data.setDeposit(reservation.getSippCode().getDeposit());
         data.setPlannedRentalFee(reservation.getPlannedRentalFee());
         data.setPlannedReturnDate(reservation.getPlannedReturnDate().format(formatter));
         data.setLastMileage(reservation.getRentData().getCar().getMileage());
         data.setPlannedReturnDepartment(reservation.getPlannedReturnDepartment().getCode());
+        data.setReservationComment(reservation.getComment());
 
         return data;
     }

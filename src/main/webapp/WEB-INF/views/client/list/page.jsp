@@ -10,11 +10,10 @@
 <body>
 <jsp:include page="../../header.jsp" />
 
-
 <div class="container">
 <div class="table-container">
     <h1 class="title">Klienci</h1>
-        <table class="table">
+        <table class="table table-stripped table-bordered">
             <tr>
                 <th>nr klienta</th>
                 <th>imię</th>
@@ -26,30 +25,54 @@
                 <th>miasto</th>
                 <th>kod pocztowy</th>
                 <th>adres</th>
+                <th><a class="button is-success" href="?add">Dodaj</a></th>
             </tr>
+            <c:choose>
+                <c:when test="${param.add!=null and param.id==null}">
+                    <form method="post">
+                        <tr>
+                            <td></td>
+                            <td><input class="input" type="text" name="firstName"></td>
+                            <td><input class="input" type="text" name="lastName"></td>
+                            <td><input class="input" type="text" name="numberOfDrivingLicence"></td>
+                            <td><input class="input" type="text" name="numberOfId"></td>
+                            <td><input class="input" type="email" name="email"></td>
+                            <td><input class="input" type="text" name="country"></td>
+                            <td><input class="input" type="text" name="city"></td>
+                            <td><input class="input" type="text" name="zippCode"></td>
+                            <td><input class="input" type="text" name="addressLine"></td>
+
+                            <td>
+                                <button class="button is-success" type="submit">Zapisz</button>
+                                <a class="button is-danger" href="?">Anuluj</a>
+                            </td>
+                            <sec:csrfInput/>
+                        </tr>
+                    </form>
+                </c:when>
+            </c:choose>
             <c:forEach items="${dataList}" var="data">
                 <c:choose>
                     <c:when test="${param.edit!=null and param.id eq data.id.toString()}">
 
                         <form method="post">
                             <tr>
-
                                 <td>${data.id}</td>
-                                <td><input type="text" name="firstName" value="${data.firstName}"></td>
-                                <td><input type="text" name="lastName" value="${data.lastName}"></td>
-                                <td><input type="text" name="numberOfDrivingLicence" value="${data.numberOfDrivingLicence}"></td>
-                                <td><input type="text" name="numberOfId" value="${data.numberOfId}"></td>
-                                <td><input type="email" name="email" value="${data.email}"></td>
-                                <td><input type="text" name="country" value="${data.country}"></td>
-                                <td><input type="text" name="city" value="${data.city}"></td>
-                                <td><input type="text" name="zippCode" value="${data.zippCode}"></td>
-                                <td><input type="text" name="addressLine" value="${data.addressLine}"></td>
+                                <td><input class="input" type="text" name="firstName" value="${data.firstName}"></td>
+                                <td><input class="input" type="text" name="lastName" value="${data.lastName}"></td>
+                                <td><input class="input" type="text" name="numberOfDrivingLicence" value="${data.numberOfDrivingLicence}"></td>
+                                <td><input class="input" type="text" name="numberOfId" value="${data.numberOfId}"></td>
+                                <td><input class="input" type="email" name="email" value="${data.email}"></td>
+                                <td><input class="input" type="text" name="country" value="${data.country}"></td>
+                                <td><input class="input" type="text" name="city" value="${data.city}"></td>
+                                <td><input class="input" type="text" name="zippCode" value="${data.zippCode}"></td>
+                                <td><input class="input" type="text" name="addressLine" value="${data.addressLine}"></td>
 
                                 <td>
 
                                     <input type="hidden" name="id" value="${data.id}"/>
-                                    <button class="button is-succes" type="submit">Zapisz</button>
-                                    <a class="button is-link" href="?">Anuluj</a>
+                                    <button class="button is-success" type="submit">Zapisz</button>
+                                    <a class="button is-danger" href="?">Anuluj</a>
                                 </td>
                                 <sec:csrfInput/>
                             </tr>

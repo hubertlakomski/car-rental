@@ -1,5 +1,6 @@
 package pl.hubertlakomski.carrental.service.reservations.rent;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.hubertlakomski.carrental.domain.model.car.Car;
 import pl.hubertlakomski.carrental.domain.model.car.Status;
@@ -13,24 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class DefaultReservationRentService implements ReservationRentService {
 
     private final ReservationRentRepository reservationRentRepository;
     private final ReservationRepository reservationRepository;
-    private final EmployeeRepository employeeRepository;
     private final CarRepository carRepository;
     private final StatusRepository statusRepository;
-
-    public DefaultReservationRentService(ReservationRentRepository reservationRentRepository,
-                                         ReservationRepository reservationRepository,
-                                         EmployeeRepository employeeRepository,
-                                         CarRepository carRepository, StatusRepository statusRepository) {
-        this.reservationRentRepository = reservationRentRepository;
-        this.reservationRepository = reservationRepository;
-        this.employeeRepository = employeeRepository;
-        this.carRepository = carRepository;
-        this.statusRepository = statusRepository;
-    }
 
     @Transactional
     @Override
@@ -56,17 +46,15 @@ public class DefaultReservationRentService implements ReservationRentService {
 
         ReservationRent reservationRent = new ReservationRent();
 
-            reservationRent.setRealRentDate(LocalDateTime.parse(reservationRentData.getRentDate()));
+            reservationRent.setRealRentDate(LocalDateTime.now());
 
             reservationRent.setComment(reservationRentData.getComment());
 
             Car rentedCar = carRepository.getOne(reservationRentData.getRentedCarId());
             reservationRent.setCar(rentedCar);
 
-            Status status = statusRepository.getOne(rentedCar.getStatus().getId());
-
-            status.setAvailable(false);
-            status.setRented(true);
+            Status rentedStatus = statusRepository.findByName("rented");
+            rentedCar.setStatus(rentedStatus);
 
     //        reservationRent.setEmployee(employeeRepository
     //                .getOne(reservationRentData.getEmployeeId())); //get from security
@@ -90,13 +78,13 @@ public class DefaultReservationRentService implements ReservationRentService {
                         .getRentDepartment().getId();
 
         List<Car> availableInDepartment =
-                carRepository.findAllByDepartmentIdAndStatus_AvailableIsTrue(departmentId);
+                carRepository.findAllByDepartmentIdAndStatusNameEquals(departmentId, "available");
 
         List<ReservationRentCarData> availableInDepartmentData = new ArrayList<>();
 
         for(Car car: availableInDepartment){
 
-            if(car.getStatus().isAvailable()){
+            if(car.getStatus().getName().equals("available")){
                 ReservationRentCarData data = new ReservationRentCarData();
 
                 data.setBrand(car.getBrand());

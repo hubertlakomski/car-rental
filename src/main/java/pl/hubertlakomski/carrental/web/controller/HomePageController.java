@@ -1,5 +1,6 @@
 package pl.hubertlakomski.carrental.web.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,15 +15,11 @@ import pl.hubertlakomski.carrental.utils.SecurityUtils;
 @Controller
 @SessionAttributes("rental_config")
 @RequestMapping("/")
+@RequiredArgsConstructor
 public class HomePageController {
 
     private final HomePageService homePageService;
     private final RentalRepository rentalRepository;
-
-    public HomePageController(HomePageService homePageService, RentalRepository rentalRepository) {
-        this.homePageService = homePageService;
-        this.rentalRepository = rentalRepository;
-    }
 
     @GetMapping
     public String prepareHomePage(Model model){

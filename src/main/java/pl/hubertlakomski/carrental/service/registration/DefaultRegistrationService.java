@@ -1,5 +1,6 @@
 package pl.hubertlakomski.carrental.service.registration;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -11,17 +12,12 @@ import pl.hubertlakomski.carrental.domain.repository.UserRepository;
 import javax.transaction.Transactional;
 
 @Service @Slf4j
+@RequiredArgsConstructor
 public class DefaultRegistrationService implements RegistrationService{
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RoleRepository roleRepository;
-
-    public DefaultRegistrationService(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleRepository roleRepository) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.roleRepository = roleRepository;
-    }
 
     @Transactional
     @Override

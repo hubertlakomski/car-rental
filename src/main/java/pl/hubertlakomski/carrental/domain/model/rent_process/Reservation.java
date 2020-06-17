@@ -51,6 +51,4 @@ public class Reservation extends ParentEntity {
     private ReservationReturn returnData;
 
     private String comment;
-
-    //TODO prePersist na plannedRentalFee
 }

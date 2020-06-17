@@ -14,9 +14,6 @@ import java.util.List;
 public class ReservationRentData {
 
     @NotNull
-    private String rentDate; //actual rental time
-
-    @NotNull
     private Long reservationId;
 
     @NotNull

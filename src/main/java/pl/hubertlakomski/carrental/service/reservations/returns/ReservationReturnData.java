@@ -12,8 +12,7 @@ public class ReservationReturnData {
 
     @NotNull
     private Long reservationId;
-    @NotNull
-    private String realReturnDate;
+
     @NotNull
     private Long realRentalFee;
     @NotNull

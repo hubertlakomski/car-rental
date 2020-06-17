@@ -1,5 +1,6 @@
 package pl.hubertlakomski.carrental.service.client.list;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.hubertlakomski.carrental.domain.model.Client;
 import pl.hubertlakomski.carrental.domain.model.data.Address;
@@ -10,14 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class DefaultClientListService implements ClientListService {
 
 
     private final ClientRepository clientRepository;
-
-    public DefaultClientListService(ClientRepository clientRepository) {
-        this.clientRepository = clientRepository;
-    }
 
     @Transactional
     @Override

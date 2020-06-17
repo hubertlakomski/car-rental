@@ -1,5 +1,6 @@
 package pl.hubertlakomski.carrental.web.controller.reservation.rent;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,14 +16,11 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("/reservations/rent")
+@RequestMapping("/reservation/rent")
+@RequiredArgsConstructor
 public class ReservationRentController {
 
     private final ReservationRentService reservationRentService;
-
-    public ReservationRentController(ReservationRentService reservationRentService) {
-        this.reservationRentService = reservationRentService;
-    }
 
     @GetMapping
     public String prepareRentReservationPage(@RequestParam Long reservationId, Model model){

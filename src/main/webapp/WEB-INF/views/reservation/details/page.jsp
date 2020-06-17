@@ -62,14 +62,20 @@
                 <th>Komentarz do rezerwacji</th> <td>${data.reservationComment}</td>
             </tr>
             <tr>
-                <th>Komenatrz do wydania</th> <td>${data.rentComment}</td>
+                <th>Komentarz do wydania</th> <td>${data.rentComment}</td>
             </tr>
             <tr>
                 <th>Komentarz do zwrotu</th> <td>${data.returnComment}</td>
             </tr>
         </table>
-        <a href="/reservations/rent?reservationId=${data.reservationId}" class="button is-success">Wypożycz</a>
-        <a href="/reservations/return?reservationId=${data.reservationId}" class="button is-danger">Przyjmij zwrot</a>
+
+        <c:if test="${data.realRentDate==null}">
+            <a href="/reservation/rent?reservationId=${data.reservationId}" class="button is-success">Wypożycz</a>
+        </c:if>
+        <c:if test="${data.realReturnDate==null && data.realRentDate!=null}">
+            <a href="/reservation/return?reservationId=${data.reservationId}" class="button is-danger">Przyjmij zwrot</a>
+        </c:if>
+
     </div>
 </div>
 

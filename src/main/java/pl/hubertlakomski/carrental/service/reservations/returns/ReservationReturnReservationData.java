@@ -12,7 +12,8 @@ public class ReservationReturnReservationData {
     private String plannedReturnDate;
     private Long plannedRentalFee;
     private Long deposit;
-    private String comment;
+    private String rentComment;
+    private String reservationComment;
     private Long lastMileage;
     private String plannedReturnDepartment;
 

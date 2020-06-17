@@ -43,7 +43,7 @@
             </c:forEach>
             </tfoot>
         </table>
-        <a href="/reservations/add" class="button is-primary">Dodaj rezerwację</a>
+        <a href="/reservation/add" class="button is-primary">Dodaj rezerwację</a>
         </div>
     </div>
 <jsp:include page="../footer.jsp" />

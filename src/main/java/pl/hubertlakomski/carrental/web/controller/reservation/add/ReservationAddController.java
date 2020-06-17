@@ -14,7 +14,7 @@ import pl.hubertlakomski.carrental.service.reservations.add.ReservationAddServic
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("reservations/add")
+@RequestMapping("/reservation/add")
 @Slf4j
 @RequiredArgsConstructor
 public class ReservationAddController {

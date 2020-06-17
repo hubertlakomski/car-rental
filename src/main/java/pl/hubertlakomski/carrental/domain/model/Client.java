@@ -13,7 +13,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="clients") @Getter @Setter
-@ToString(exclude = {"address", "reservations"}, callSuper = true)
+@ToString(exclude = {"address"}, callSuper = true)
 public class Client extends ParentEntity {
 
     @Column(nullable = false)
@@ -33,8 +33,5 @@ public class Client extends ParentEntity {
 
     @OneToOne @JoinColumn(name="address_id")
     private Address address;
-
-    @OneToMany(mappedBy = "client")
-    private Set<Reservation> reservations;
 
 }

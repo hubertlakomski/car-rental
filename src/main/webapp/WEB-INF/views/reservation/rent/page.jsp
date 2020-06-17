@@ -10,35 +10,41 @@
 </head>
 <body>
 <jsp:include page="../../header.jsp" />
-<div>
+<div class="container is-widescreen">
+    <div class="notification">
     <form:form method="post" modelAttribute="reservationRentData">
-        <p>
-            Nr rejestracyjny samochodu:
-            <form:select itemValue="id"
-                         itemLabel="carDescription"
-                         path="rentedCarId" items="${availableCarsInDepartment}"
-                         multiple="false" />
-            <form:errors path="rentedCarId"/>
-        </p>
-        <p>
-            <form:label path="rentDate">Faktyczny czas wypożyczenia:
-                <form:input path="rentDate" type="datetime-local" required="required"/>
-            </form:label><form:errors path="rentDate"/>
-        </p>
-        <p>
-            Komentarz:<br/>
-            <form:textarea path="comment"/><br/>
-            <form:errors path="comment" cssClass="error"/>
-        </p>
+        <div class="field">
+            <label class="label">Wybierz samochód: </label>
+            <div class="control">
+                <div class="select is-fullwidth">
+                    <form:select itemValue="id"
+                                 itemLabel="carDescription"
+                                 path="rentedCarId" items="${availableCarsInDepartment}"
+                                 multiple="false" />
+                    <form:errors path="rentedCarId"/>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Komentarz</label>
+            <div class="control">
+                <form:textarea class="textarea is-fullwidth" path="comment"/>
+                <form:errors path="comment" cssClass="error"/>
+            </div>
+        </div>
 
         <form:input  type="hidden"  path="reservationId" value="${reservationRentData.reservationId}"/>
 
-        <p>
-        <div class="control">
-            <form:button class="button is-link" type="submit">Zatwierdź</form:button>
+        <div class="field is-grouped">
+            <div class="control">
+                <form:button class="button is-link" type="submit">Wypożycz</form:button>
+            </div>
+            <div class="control">
+                <form:button type="reset" class="button is-link is-light">Wyczysć</form:button>
+            </div>
         </div>
-        </p>
     </form:form>
+</div>
 </div>
 <jsp:include page="../../footer.jsp" />
 </body>
