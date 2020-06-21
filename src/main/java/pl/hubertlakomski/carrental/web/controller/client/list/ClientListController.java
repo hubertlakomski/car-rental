@@ -37,7 +37,7 @@ public class ClientListController {
 
     @PostMapping(params={"edit", "id"})
     public String editClientDetails(@Valid ClientEditData clientEditData,
-            BindingResult bindingResult){
+                                    BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
 
@@ -51,8 +51,8 @@ public class ClientListController {
     }
 
     @PostMapping(params={"add"})
-    public String editClientDetails(@Valid ClientAddData clientAddData,
-                                    BindingResult bindingResult){
+    public String addClientDetails(@Valid ClientAddData clientAddData,
+                                   BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
 
