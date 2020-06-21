@@ -9,7 +9,8 @@
     <title>Logowanie</title>
 </head>
 <body>
-<jsp:include page="header.jsp" />
+<jsp:include page="../header.jsp" />
+
 <div class="container is-widescreen">
     <div class="notification">
         <form method="post">
@@ -41,6 +42,8 @@
         </form>
     </div>
 </div>
-<jsp:include page="footer.jsp" />
+
+
+<jsp:include page="../footer.jsp" />
 </body>
 </html>

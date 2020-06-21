@@ -11,8 +11,8 @@
 <jsp:include page="../../header.jsp" />
 
 <div class="container">
-<div class="table-container">
-    <h1 class="title">Klienci</h1>
+    <div class="table-container">
+        <h1 class="title">Klienci</h1>
         <table class="table table-stripped table-bordered">
             <tr>
                 <th>nr klienta</th>
@@ -32,15 +32,15 @@
                     <form method="post">
                         <tr>
                             <td></td>
-                            <td><input class="input" type="text" name="firstName"></td>
-                            <td><input class="input" type="text" name="lastName"></td>
-                            <td><input class="input" type="text" name="numberOfDrivingLicence"></td>
-                            <td><input class="input" type="text" name="numberOfId"></td>
+                            <td><input class="input" type="text" required="required" name="firstName"></td>
+                            <td><input class="input" type="text" required="required" name="lastName"></td>
+                            <td><input class="input" type="text" required="required" name="numberOfDrivingLicence"></td>
+                            <td><input class="input" type="text" required="required" name="numberOfId"></td>
                             <td><input class="input" type="email" name="email"></td>
-                            <td><input class="input" type="text" name="country"></td>
-                            <td><input class="input" type="text" name="city"></td>
+                            <td><input class="input" type="text" required="required" name="country"></td>
+                            <td><input class="input" type="text" required="required" name="city"></td>
                             <td><input class="input" type="text" name="zippCode"></td>
-                            <td><input class="input" type="text" name="addressLine"></td>
+                            <td><input class="input" type="text" required="required" name="addressLine"></td>
 
                             <td>
                                 <button class="button is-success" type="submit">Zapisz</button>
@@ -51,26 +51,26 @@
                     </form>
                 </c:when>
             </c:choose>
-            <c:forEach items="${dataList}" var="data">
+            <c:forEach items="${dataList}" var="department">
                 <c:choose>
-                    <c:when test="${param.edit!=null and param.id eq data.id.toString()}">
+                    <c:when test="${param.edit!=null and param.id eq department.id.toString()}">
 
                         <form method="post">
                             <tr>
-                                <td>${data.id}</td>
-                                <td><input class="input" type="text" name="firstName" value="${data.firstName}"></td>
-                                <td><input class="input" type="text" name="lastName" value="${data.lastName}"></td>
-                                <td><input class="input" type="text" name="numberOfDrivingLicence" value="${data.numberOfDrivingLicence}"></td>
-                                <td><input class="input" type="text" name="numberOfId" value="${data.numberOfId}"></td>
-                                <td><input class="input" type="email" name="email" value="${data.email}"></td>
-                                <td><input class="input" type="text" name="country" value="${data.country}"></td>
-                                <td><input class="input" type="text" name="city" value="${data.city}"></td>
-                                <td><input class="input" type="text" name="zippCode" value="${data.zippCode}"></td>
-                                <td><input class="input" type="text" name="addressLine" value="${data.addressLine}"></td>
+                                <td>${department.id}</td>
+                                <td><input class="input" type="text" required="required" name="firstName" value="${department.firstName}"></td>
+                                <td><input class="input" type="text" required="required" name="lastName" value="${department.lastName}"></td>
+                                <td><input class="input" type="text" required="required" name="numberOfDrivingLicence" value="${department.numberOfDrivingLicence}"></td>
+                                <td><input class="input" type="text" required="required" name="numberOfId" value="${department.numberOfId}"></td>
+                                <td><input class="input" type="email" name="email" value="${department.email}"></td>
+                                <td><input class="input" type="text" required="required" name="country" value="${department.country}"></td>
+                                <td><input class="input" type="text" required="required" name="city" value="${department.city}"></td>
+                                <td><input class="input" type="text" name="zippCode" value="${department.zippCode}"></td>
+                                <td><input class="input" type="text" required="required" name="addressLine" value="${department.addressLine}"></td>
 
                                 <td>
 
-                                    <input type="hidden" name="id" value="${data.id}"/>
+                                    <input type="hidden" name="id" value="${department.id}"/>
                                     <button class="button is-success" type="submit">Zapisz</button>
                                     <a class="button is-danger" href="?">Anuluj</a>
                                 </td>
@@ -80,24 +80,25 @@
                     </c:when>
                     <c:otherwise>
                         <tr>
-                            <td>${data.id}</td>
-                            <td>${data.firstName}</td>
-                            <td>${data.lastName}</td>
-                            <td>${data.numberOfDrivingLicence}</td>
-                            <td>${data.numberOfId}</td>
-                            <td>${data.email}</td>
-                            <td>${data.country}</td>
-                            <td>${data.city}</td>
-                            <td>${data.zippCode}</td>
-                            <td>${data.addressLine}</td>
-                            <td><a class="button is-link" href="?edit&id=${data.id}">Edytuj</a> </td>
+                            <td>${department.id}</td>
+                            <td>${department.firstName}</td>
+                            <td>${department.lastName}</td>
+                            <td>${department.numberOfDrivingLicence}</td>
+                            <td>${department.numberOfId}</td>
+                            <td>${department.email}</td>
+                            <td>${department.country}</td>
+                            <td>${department.city}</td>
+                            <td>${department.zippCode}</td>
+                            <td>${department.addressLine}</td>
+                            <td><a class="button is-link" href="?edit&id=${department.id}">Edytuj</a> </td>
                         </tr>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
         </table>
+    </div>
 </div>
-</div>
+
 
 <jsp:include page="../../footer.jsp" />
 </body>

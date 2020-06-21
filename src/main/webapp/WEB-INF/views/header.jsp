@@ -1,8 +1,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
-<link rel="stylesheet" href="/webjars/bulma/0.8.2/css/bulma.min.css">
-<link rel="stylesheet" href="webjars/bulma-calendar/6.0.7/dist/css/bulma-calendar.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/webjars/bulma/0.8.2/css/bulma.min.css">
+<link rel="stylesheet" href="webjars/font-awesome/5.13.0/css/all.css">
 
 <style>
     #navbar-item {
@@ -13,42 +13,29 @@
     }
 </style>
 
-
 <nav class="navbar is-transparent">
     <div class="navbar-brand">
         <a id="navbar-item" href="/"></a>
     </div>
-
+    <sec:authorize access="isAuthenticated()">
     <div class="navbar-menu">
         <div class="navbar-start">
-            <a class="navbar-item" href="/">
-                Home
-            </a>
 
             <a class="navbar-item" href="/reservations">
-                Reservations
+                Rezerwacje
             </a>
-
-            <a class="navbar-item" href="/returns">
-                Returns
+            <a class="navbar-item" href="/departments">
+                Oddziały
             </a>
-
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    More
-                </a>
-
-                <div class="navbar-dropdown">
-                    <a class="navbar-item" href="/clients">
-                        Clients
-                    </a>
-                    <a class="navbar-item" href="/cars">
-                        Cars
-                    </a>
-                    <a class="navbar-item" href="/employees">
-                        Employees
-                    </a>
-                </div>
+            <a class="navbar-item" href="/clients">
+                Klienci
+            </a>
+            <a class="navbar-item" href="/cars">
+                Samochody
+            </a>
+            <a class="navbar-item" href="/employees">
+                Pracownicy
+            </a>
             </div>
         </div>
         <div class="navbar-end">
@@ -61,4 +48,5 @@
             </div>
         </div>
     </div>
+    </sec:authorize>
 </nav>

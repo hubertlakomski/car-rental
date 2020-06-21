@@ -21,8 +21,13 @@
 
 <footer class="footer">
     <div id="wrapper" class="content has-text-centered">
-        <p>
-            <strong><a href="https://github.com/hubertlakomski/car-rental">CRS</a></strong> by<a href="https://github.com/hubertlakomski"> Hubert Łakomski</a>.
-        </p>
+            <a href="https://github.com/hubertlakomski/car-rental">
+                <button class="button is-medium">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>GitHub</span>
+                </button>
+            </a>
     </div>
 </footer>

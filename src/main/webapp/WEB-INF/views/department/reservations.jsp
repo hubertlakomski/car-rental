@@ -11,9 +11,9 @@
 <jsp:include page="../header.jsp" />
 
     <div class="container is-widescreen">
-        <div class="notification">
+        <div class="table-container">
         <h1 class="title">Bieżące rezerwacje oddziału - ${departmentCode} </h1>
-        <table class="table">
+        <table class="table table-stripped table-bordered">
             <thead>
             <tr>
                 <th>Numer rezerwacji</th>
@@ -28,17 +28,17 @@
             </tr>
             </thead>
             <tfoot>
-            <c:forEach items="${data}" var="data">
+            <c:forEach items="${data}" var="department">
                 <tr>
-                    <td>${data.reservationId}</td>
-                    <td>${data.sippCode}</td>
-                    <td>${data.plannedRentDate}</td>
-                    <td>${data.plannedReturnDate}</td>
-                    <td>${data.returnDepartmentCode}</td>
-                    <td><a href="/client?id=${data.clientId}">${data.clientFullName}</a></td>
-                    <td>${data.plannedCharge}</td>
-                    <td>${data.deposit}</td>
-                    <td><a href="/reservation?id=${data.reservationId}" class="button is-info">Szczegóły</a></td>
+                    <td>${department.reservationId}</td>
+                    <td>${department.sippCode}</td>
+                    <td>${department.plannedRentDate}</td>
+                    <td>${department.plannedReturnDate}</td>
+                    <td>${department.returnDepartmentCode}</td>
+                    <td><a href="/client?id=${department.clientId}">${department.clientFullName}</a></td>
+                    <td>${department.plannedCharge}</td>
+                    <td>${department.deposit}</td>
+                    <td><a href="/reservation?id=${department.reservationId}" class="button is-info">Szczegóły</a></td>
                 </tr>
             </c:forEach>
             </tfoot>

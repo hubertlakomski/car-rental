@@ -26,16 +26,16 @@
             </tr>
             </thead>
             <tfoot>
-            <c:forEach items="${data}" var="data">
+            <c:forEach items="${data}" var="department">
                 <tr>
-                    <td>${data.reservationId}</td>
-                    <td>${data.realRentDate}</td>
-                    <td>${data.plannedReturnDate}</td>
-                    <td>${data.rentComment}</td>
-                    <td>${data.sippCode}</td>
-                    <td><a href="/car?id=${data.carId}">${data.carDescription}</a></td>
-                    <td><a href="/client?id=${data.clientId}">${data.clientFullName}</a></td>
-                    <td><a href="/reservation?id=${data.reservationId}" class="button is-info">Szczegóły</a></td>
+                    <td>${department.reservationId}</td>
+                    <td>${department.realRentDate}</td>
+                    <td>${department.plannedReturnDate}</td>
+                    <td>${department.rentComment}</td>
+                    <td>${department.sippCode}</td>
+                    <td><a href="/car?id=${department.carId}">${department.carDescription}</a></td>
+                    <td><a href="/client?id=${department.clientId}">${department.clientFullName}</a></td>
+                    <td><a href="/reservation?id=${department.reservationId}" class="button is-info">Szczegóły</a></td>
                 </tr>
             </c:forEach>
             </tfoot>

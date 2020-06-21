@@ -40,8 +40,8 @@
                             <td>
                                 <div class="select">
                                     <select name="sippCodeId">
-                                        <c:forEach items="${sippCodes}" var="code">
-                                            <option value="${code.id}">${code.code}</option>
+                                        <c:forEach items="${sippCodes}" var="client">
+                                            <option value="${client.id}">${client.code}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -49,8 +49,8 @@
                             <td>
                                 <div class="select">
                                     <select name="departmentId" >
-                                        <c:forEach items="${departments}" var="department">
-                                            <option value="${department.id}">${department.code}</option>
+                                        <c:forEach items="${departments}" var="client">
+                                            <option value="${client.id}">${client.code}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
@@ -73,24 +73,24 @@
                     </form>
                 </c:when>
             </c:choose>
-            <c:forEach items="${dataList}" var="data">
+            <c:forEach items="${dataList}" var="department">
                 <c:choose>
-                    <c:when test="${param.edit!=null and param.id eq data.id.toString()}">
+                    <c:when test="${param.edit!=null and param.id eq department.id.toString()}">
 
                         <form method="post">
                             <tr>
-                                <td><input class="input" type="text" name="plateNumber" value="${data.plateNumber}"></td>
-                                <td><input class="input" type="text" name="brand" value="${data.brand}"></td>
-                                <td><input class="input" type="text" name="model" value="${data.model}"></td>
-                                <td><input class="input" type="text" name="color" value="${data.color}"></td>
-                                <td><input class="input" min="1900" max="2020" type="number" name="production" value="${data.production}"></td>
-                                <td><input class="input" type="number" name="mileage" value="${data.mileage}"></td>
+                                <td><input class="input" type="text" name="plateNumber" value="${department.plateNumber}"></td>
+                                <td><input class="input" type="text" name="brand" value="${department.brand}"></td>
+                                <td><input class="input" type="text" name="model" value="${department.model}"></td>
+                                <td><input class="input" type="text" name="color" value="${department.color}"></td>
+                                <td><input class="input" min="1900" max="2020" type="number" name="production" value="${department.production}"></td>
+                                <td><input class="input" type="number" name="mileage" value="${department.mileage}"></td>
                                 <td>
                                     <div class="select">
                                         <select name="sippCodeId">
-                                            <c:forEach items="${sippCodes}" var="code">
-                                                <option  ${code.id == data.sippCodeId? 'selected="selected"' : ''}
-                                                        value="${code.id}">${code.code}</option>
+                                            <c:forEach items="${sippCodes}" var="client">
+                                                <option  ${client.id == department.sippCodeId? 'selected="selected"' : ''}
+                                                        value="${client.id}">${client.code}</option>
                                             </c:forEach>
                                         </select>
                                     </div>
@@ -98,12 +98,12 @@
                                 <td>
                                     <div class="select">
                                         <select name="departmentId" >
-                                            <c:forEach items="${departments}" var="department">
+                                            <c:forEach items="${departments}" var="client">
                                                 <option
-                                                        ${department.id == data.departmentId ? 'selected="selected"' : ''}
-                                                        value="${department.id}">
+                                                        ${client.id == department.departmentId ? 'selected="selected"' : ''}
+                                                        value="${client.id}">
 
-                                                        ${department.code}
+                                                        ${client.code}
                                                 </option>
                                             </c:forEach>
                                         </select>
@@ -113,7 +113,7 @@
                                     <div class="select">
                                         <select name="statusId">
                                             <c:forEach items="${statuses}" var="status">
-                                                <option ${status.id == data.statusId ? 'selected="selected"' : ''}
+                                                <option ${status.id == department.statusId ? 'selected="selected"' : ''}
                                                         value="${status.id}">${status.plDescription}</option>
                                             </c:forEach>
                                         </select>
@@ -121,7 +121,7 @@
                                 </td>
                                 <td>
 
-                                    <input type="hidden" name="id" value="${data.id}"/>
+                                    <input type="hidden" name="id" value="${department.id}"/>
                                     <button class="button is-success" type="submit">Zapisz</button>
                                     <a class="button is-danger" href="?">Anuluj</a>
                                 </td>
@@ -131,16 +131,16 @@
                     </c:when>
                     <c:otherwise>
                         <tr>
-                            <td>${data.plateNumber}</td>
-                            <td>${data.brand}</td>
-                            <td>${data.model}</td>
-                            <td>${data.color}</td>
-                            <td>${data.production}</td>
-                            <td>${data.mileage}</td>
-                            <td>${data.sippCodeDsc}</td>
-                            <td>${data.departmentDsc}</td>
-                            <td>${data.statusDsc}</td>
-                            <td><a class="button is-link" href="?edit&id=${data.id}">Edytuj</a> </td>
+                            <td>${department.plateNumber}</td>
+                            <td>${department.brand}</td>
+                            <td>${department.model}</td>
+                            <td>${department.color}</td>
+                            <td>${department.production}</td>
+                            <td>${department.mileage}</td>
+                            <td>${department.sippCodeDsc}</td>
+                            <td>${department.departmentDsc}</td>
+                            <td>${department.statusDsc}</td>
+                            <td><a class="button is-link" href="?edit&id=${department.id}">Edytuj</a> </td>
                         </tr>
                     </c:otherwise>
                 </c:choose>
