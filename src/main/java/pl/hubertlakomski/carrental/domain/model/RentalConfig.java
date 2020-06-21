@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="rental_config") @Getter @Setter @ToString
-public class Rental extends ParentEntity{
+public class RentalConfig extends ParentEntity{
 
     private String name;
     private String domain;
