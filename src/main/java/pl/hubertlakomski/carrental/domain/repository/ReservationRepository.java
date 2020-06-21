@@ -7,8 +7,10 @@ import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
 
-    List<Reservation> findAllByRentDepartmentIdAndRentDataIsNullOrderByPlannedRentDate(Long id);
-    List<Reservation> findAllByPlannedReturnDepartmentIdAndReturnDataIsNullOrderByPlannedReturnDate(Long id);
+    List<Reservation> findAllByRentDepartmentIdOrderByPlannedRentDate(Long id);
+    List<Reservation> findAllByPlannedReturnDepartmentIdOrderByPlannedReturnDate(Long id);
+
+    List<Reservation> findAllByOrderByPlannedRentDate();
 
     Reservation getReservationById(Long id);
 
