@@ -34,4 +34,8 @@ public class Client extends ParentEntity {
     @OneToOne @JoinColumn(name="address_id")
     private Address address;
 
+    public String getFullName(){
+       return firstName+" "+lastName;
+    }
+
 }
