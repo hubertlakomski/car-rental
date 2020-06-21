@@ -11,8 +11,8 @@ import pl.hubertlakomski.carrental.domain.repository.DepartmentRepository;
 import pl.hubertlakomski.carrental.domain.repository.SippCodeRepository;
 import pl.hubertlakomski.carrental.domain.repository.StatusRepository;
 import pl.hubertlakomski.carrental.service.car.list.data.StatusData;
-import pl.hubertlakomski.carrental.service.reservations.add.data.DepartmentData;
-import pl.hubertlakomski.carrental.service.reservations.add.data.SippCodeData;
+import pl.hubertlakomski.carrental.service.reservations.data.DepartmentData;
+import pl.hubertlakomski.carrental.service.reservations.data.SippCodeData;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
