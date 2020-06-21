@@ -70,9 +70,11 @@
             <a class="navbar-item" href="/cars">
                 Samochody
             </a>
-            <a class="navbar-item" href="/employees">
-                Pracownicy
-            </a>
+            <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')">
+                <a class="navbar-item" href="/employees">
+                    Pracownicy
+                </a>
+            </sec:authorize>
             </div>
         <div class="navbar-end">
             <div class="navbar-item">
