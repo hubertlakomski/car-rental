@@ -27,7 +27,7 @@ public class DefaultDepartmentReservationsService implements DepartmentReservati
 
         List<DepartmentReservationsData> data = new ArrayList<>();
         List<Reservation> departmentReservations =
-                reservationRepository.findAllByRentDepartmentIdAndRentDataIsNullOrderByPlannedRentDate(departmentId);
+                reservationRepository.findAllByRentDepartmentIdOrderByPlannedRentDate(departmentId);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
@@ -50,7 +50,7 @@ public class DefaultDepartmentReservationsService implements DepartmentReservati
             reservationData.setSippCode(reservation.getSippCode().getCode());
             reservationData.setDeposit(reservation.getSippCode().getDeposit());
 
-            reservationData.setPlannedCharge(reservation.getPlannedRentalFee());
+            reservationData.setPlannedCharge((long) reservation.getPlannedRentalFee());
 
             data.add(reservationData);
         }

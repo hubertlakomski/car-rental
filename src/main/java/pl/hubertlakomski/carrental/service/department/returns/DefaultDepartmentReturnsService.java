@@ -32,7 +32,7 @@ public class DefaultDepartmentReturnsService implements DepartmentReturnsService
 
         List<Reservation> departmentReturns =
                 reservationRepository.
-                        findAllByPlannedReturnDepartmentIdAndReturnDataIsNullOrderByPlannedReturnDate(departmentId);
+                        findAllByPlannedReturnDepartmentIdOrderByPlannedReturnDate(departmentId);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 
