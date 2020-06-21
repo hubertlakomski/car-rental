@@ -4,27 +4,27 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-@Data
-@ToString
+@Data @ToString
 public class ClientAddData {
 
     @Email
     private String email;
-    @NotNull
+    @NotNull @NotBlank
     private String firstName;
-    @NotNull
+    @NotNull @NotBlank
     private String lastName;
-    @NotNull
+    @NotNull @NotBlank
     private String numberOfDrivingLicence;
-    @NotNull
+    @NotNull @NotBlank
     private String numberOfId;
-    @NotNull
+    @NotNull @NotBlank
     private String country;
-    @NotNull
+    @NotNull @NotBlank
     private String city;
-    @NotNull
+    @NotNull @NotBlank
     private String addressLine;
     private String zippCode;
 
