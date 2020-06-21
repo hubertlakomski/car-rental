@@ -57,7 +57,7 @@ public class DefaultReservationDetailsService implements ReservationDetailsServi
         reservationDetailsData.setPlannedReturnDepartment(reservation.getPlannedReturnDepartment().getCode());
         reservationDetailsData.setClient(reservation.getClient().getFirstName()+
                 " "+reservation.getClient().getLastName());
-        reservationDetailsData.setPlannedRentalFee(reservation.getPlannedRentalFee().toString());
+        reservationDetailsData.setPlannedRentalFee(String.valueOf(reservation.getPlannedRentalFee()));
         reservationDetailsData.setDeposit(reservation.getSippCode().getDeposit().toString());
         reservationDetailsData.setReservationComment(reservation.getComment());
 

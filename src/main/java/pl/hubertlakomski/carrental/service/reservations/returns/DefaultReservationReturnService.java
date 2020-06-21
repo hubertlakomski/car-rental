@@ -81,7 +81,7 @@ public class DefaultReservationReturnService implements ReservationReturnService
 
         data.setRentComment(reservation.getRentData().getComment());
         data.setDeposit(reservation.getSippCode().getDeposit());
-        data.setPlannedRentalFee(reservation.getPlannedRentalFee());
+        data.setPlannedRentalFee((long) reservation.getPlannedRentalFee());
         data.setPlannedReturnDate(reservation.getPlannedReturnDate().format(formatter));
         data.setLastMileage(reservation.getRentData().getCar().getMileage());
         data.setPlannedReturnDepartment(reservation.getPlannedReturnDepartment().getCode());

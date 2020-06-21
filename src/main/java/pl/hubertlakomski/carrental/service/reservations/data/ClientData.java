@@ -1,4 +1,4 @@
-package pl.hubertlakomski.carrental.service.reservations.add.data;
+package pl.hubertlakomski.carrental.service.reservations.data;
 
 import lombok.Data;
 import lombok.ToString;
@@ -13,7 +13,7 @@ public class ClientData {
 
     public String getDescription(){
 
-        return firstName+" "+lastName+" (nr klienta: "+id+")";
+        return firstName+" "+lastName;
     }
 
 }

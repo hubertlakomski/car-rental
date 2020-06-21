@@ -1,4 +1,4 @@
-package pl.hubertlakomski.carrental.service.reservations.add.data;
+package pl.hubertlakomski.carrental.service.reservations.data;
 
 import lombok.Data;
 import lombok.ToString;

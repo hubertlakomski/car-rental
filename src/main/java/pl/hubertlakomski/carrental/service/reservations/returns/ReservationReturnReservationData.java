@@ -2,9 +2,7 @@ package pl.hubertlakomski.carrental.service.reservations.returns;
 
 import lombok.Data;
 import lombok.ToString;
-import pl.hubertlakomski.carrental.service.reservations.add.data.DepartmentData;
-
-import java.util.List;
+import pl.hubertlakomski.carrental.service.reservations.data.DepartmentData;
 
 @Data @ToString
 public class ReservationReturnReservationData {
